@@ -30,6 +30,8 @@ class OPABasicDataset(Dataset):
             csv_file = os.path.join(data_root, "test_data_pos.csv")
         elif mode_type == "evaluni":
             csv_file = os.path.join(data_root, "test_data_pos_unique.csv")
+        elif mode_type == 'eval_self':
+            csv_file = os.path.join(data_root, 'eval_self.csv')
         else:
             raise NotImplementedError
         self.data = obtain_opa_data(csv_file)
