@@ -88,7 +88,7 @@ def parse_args():
     parser.add_argument("--b2", type=float, default=0.999, help="adam: decay of first order momentum of gradient")
     parser.add_argument("--expid", type=str, required=True, help="experiment name")
     parser.add_argument("--data_root", type=str, default="OPA", help="dataset root")
-    parser.add_argument("--eval_type", type=str, choices=["train", "trainpos", "sample", "eval", "evaluni"], default="eval", help="evaluation type")
+    parser.add_argument("--eval_type", type=str, choices=["train", "trainpos", "sample", "eval", "evaluni", "eval_self"], default="eval", help="evaluation type")
     parser.add_argument("--d_noise", type=int, default=1024, help="dimension of random noise/vector")
     parser.add_argument("--d_model", type=int, default=512, help="dimension of features")
     parser.add_argument("--d_k", type=int, default=64, help="dimension of key in multi-head attention")
