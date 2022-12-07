@@ -36,10 +36,11 @@ class OPADst1(OPABasicDataset):
         fg_bbox = self.get_fg_bbox(bg_img, fg_img)
         trans_label = get_trans_label(bg_img, fg_img, bbox)
 
-        if "eval" in self.mode_type:
-            return index_, annid, scid, bg_img_arr, fg_img_arr, fg_msk_arr, comp_img_arr, comp_msk_arr, bg_feat, fg_feat, fg_msk_feat, fg_bbox, comp_feat, comp_msk_feat, comp_crop_feat, label, trans_label, catnm
-        else:
-            return index_, bg_feat, fg_feat, fg_msk_feat, fg_bbox, comp_feat, comp_msk_feat, comp_crop_feat, label, trans_label, catnm
+        # if "eval" in self.mode_type:
+        #     return index_, annid, scid, bg_img_arr, fg_img_arr, fg_msk_arr, comp_img_arr, comp_msk_arr, bg_feat, fg_feat, fg_msk_feat, fg_bbox, comp_feat, comp_msk_feat, comp_crop_feat, label, trans_label, catnm
+        # else:
+        #     return index_, bg_feat, fg_feat, fg_msk_feat, fg_bbox, comp_feat, comp_msk_feat, comp_crop_feat, label, trans_label, catnm
+        return index_, annid, scid, bg_img_arr, fg_img_arr, fg_msk_arr, comp_img_arr, comp_msk_arr, bg_feat, fg_feat, fg_msk_feat, fg_bbox, comp_feat, comp_msk_feat, comp_crop_feat, label, trans_label, catnm
 
     def img_trans_bg(self, x):
         y = transforms.Resize((self.size, self.size), interpolation=Image.BILINEAR)(x)
