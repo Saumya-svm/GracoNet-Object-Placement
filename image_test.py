@@ -101,10 +101,10 @@ def parse_args():
     return opt
 
 def info():
-    annID = '3332'
-    scID = '333599'
-    bbox = '[56, 152, 94, 184]'
-    scale = 0.2897
+    annID = '1'
+    scID = '2'
+    bbox = '[216, 100, 363, 546]'
+    scale = 0.1
     label = '0'
     catnm = 'dog'
     new_img_path = 'composite/test_set/3332_333599_56_152_94_184_0.2879_0.jpg'
@@ -115,9 +115,17 @@ def info():
             new_img_path, new_msk_path]
     return [info]
     
-
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
+    parser.add_argument("--lr", type=float, default=0.00002, help="adam: learning rate")
+    parser.add_argument("--d_noise", type=int, default=1024, help="dimension of random noise/vector")
+    parser.add_argument("--d_model", type=int, default=512, help="dimension of features")
+    parser.add_argument("--d_k", type=int, default=64, help="dimension of key in multi-head attention")
+    parser.add_argument("--d_v", type=int, default=64, help="dimension of value in multi-head attention")
+    parser.add_argument("--n_heads", type=int, default=8, help="number of heads in multi-head attention")
+    parser.add_argument("--len_k", type=int, default=84, help="number of background nodes")
+    parser.add_argument("--b1", type=float, default=0.5, help="adam: decay of first order momentum of gradient")
+    parser.add_argument("--b2", type=float, default=0.999, help="adam: decay of first order momentum of gradient")
     parser.add_argument("--dst", type=str, choices=list(dataset_dict.keys()), default="OPADst1", help="dataloder type")
     parser.add_argument("--img_size", type=int, default=256, help="size of image", required=False)
     parser.add_argument("--expid", type=str, default='graconet', help="experiment name", required=False)
