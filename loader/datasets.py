@@ -15,8 +15,8 @@ else:
 
 
 class OPADst1(OPABasicDataset):
-    def __init__(self, size, mode_type, data_root):
-        super().__init__(size, mode_type, data_root)
+    def __init__(self, size, mode_type, data_root, info):
+        super().__init__(size, mode_type, data_root, info)
 
     def __getitem__(self, index):
         index_, annid, scid, bbox, scale, label, catnm, bg_img, fg_img, fg_msk, comp_img, comp_msk = super().__getitem__(index)

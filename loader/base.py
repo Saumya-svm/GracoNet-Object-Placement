@@ -11,7 +11,7 @@ else:
 
 
 class OPABasicDataset(Dataset):
-    def __init__(self, size, mode_type, data_root):
+    def __init__(self, size, mode_type, data_root, info):
         # self.error_bar = 0.15
         self.size = size
         self.mode_type = mode_type
@@ -20,21 +20,23 @@ class OPABasicDataset(Dataset):
         self.fg_dir = os.path.join(data_root, "foreground")
         self.fg_msk_dir = os.path.join(data_root, "foreground")
 
-        if mode_type == "train":
-            csv_file = os.path.join(data_root, "train_data.csv")
-        elif mode_type == "trainpos":
-            csv_file = os.path.join(data_root, "train_data_pos.csv")
-        elif mode_type == "sample":
-            csv_file = os.path.join(data_root, "test_data.csv")
-        elif mode_type == "eval":
-            csv_file = os.path.join(data_root, "test_data_pos.csv")
-        elif mode_type == "evaluni":
-            csv_file = os.path.join(data_root, "test_data_pos_unique.csv")
-        elif mode_type == 'eval_self':
-            csv_file = os.path.join(data_root, 'eval_self.csv')
-        else:
-            raise NotImplementedError
-        self.data = obtain_opa_data(csv_file)
+        # if mode_type == "train":
+        #     csv_file = os.path.join(data_root, "train_data.csv")
+        # elif mode_type == "trainpos":
+        #     csv_file = os.path.join(data_root, "train_data_pos.csv")
+        # elif mode_type == "sample":
+        #     csv_file = os.path.join(data_root, "test_data.csv")
+        # elif mode_type == "eval":
+        #     csv_file = os.path.join(data_root, "test_data_pos.csv")
+        # elif mode_type == "evaluni":
+        #     csv_file = os.path.join(data_root, "test_data_pos_unique.csv")
+        # elif mode_type == 'eval_self':
+        #     csv_file = os.path.join(data_root, 'eval_self.csv')
+        # else:
+        #     raise NotImplementedError
+        # self.data = obtain_opa_data(csv_file)
+        self.data = info
+
 
     def __len__(self):
         return len(self.data)

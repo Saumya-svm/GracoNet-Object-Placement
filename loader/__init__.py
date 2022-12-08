@@ -12,8 +12,8 @@ else:
 
 dataset_dict = {"OPABasicDataset": OPABasicDataset, "OPADst1": OPADst1, "OPADst3": OPADst3}
 
-def get_loader(name, batch_size, num_workers, image_size, shuffle, mode_type, data_root):
-    dset = dataset_dict[name](size=image_size, mode_type=mode_type, data_root=data_root)
+def get_loader(name, batch_size, num_workers, image_size, shuffle, mode_type, data_root, info):
+    dset = dataset_dict[name](size=image_size, mode_type=mode_type, data_root=data_root, info=info)
     loader = DataLoader(dset, batch_size=batch_size, shuffle=shuffle, num_workers=num_workers)
     return loader
 
