@@ -79,28 +79,6 @@ def infer(eval_loader, opt, model=None, repeat=1):
         for line in gen_res:
             f.write(line + '\n')
 
-
-def parse_args():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--dst", type=str, choices=list(dataset_dict.keys()), default="OPADst1", help="dataloder type")
-    parser.add_argument("--img_size", type=int, default=256, help="size of image")
-    parser.add_argument("--lr", type=float, default=0.00002, help="adam: learning rate")
-    parser.add_argument("--b1", type=float, default=0.5, help="adam: decay of first order momentum of gradient")
-    parser.add_argument("--b2", type=float, default=0.999, help="adam: decay of first order momentum of gradient")
-    parser.add_argument("--expid", type=str, required=True, help="experiment name")
-    parser.add_argument("--data_root", type=str, default="OPA", help="dataset root")
-    parser.add_argument("--eval_type", type=str, choices=["train", "trainpos", "sample", "eval", "evaluni", "eval_self"], default="eval", help="evaluation type")
-    parser.add_argument("--d_noise", type=int, default=1024, help="dimension of random noise/vector")
-    parser.add_argument("--d_model", type=int, default=512, help="dimension of features")
-    parser.add_argument("--d_k", type=int, default=64, help="dimension of key in multi-head attention")
-    parser.add_argument("--d_v", type=int, default=64, help="dimension of value in multi-head attention")
-    parser.add_argument("--n_heads", type=int, default=8, help="number of heads in multi-head attention")
-    parser.add_argument("--len_k", type=int, default=84, help="number of background nodes")
-    parser.add_argument("--epoch", type=int, required=True, help="which epoch to evaluate")
-    parser.add_argument("--repeat", type=int, default=1, help="number of times to sample different random vectors")
-    opt = parser.parse_args()
-    return opt
-
 def info(comp, mask, bbox, scale):
     annID = '1'
     scID = '2'
@@ -116,22 +94,6 @@ def info(comp, mask, bbox, scale):
     os.rename(composite_path, 'new_OPA/'+new_img_path)
     mask.save(mask_path)
     os.rename(mask_path, 'new_OPA/'+new_msk_path)
-    # annID = '3'
-    # scID = '4'
-    # bbox = '[216, 100, 363, 546]'
-    # scale = 0.99
-    # label = '1'
-    # catnm = 'dog'
-    # new_img_path = 'composite/test_set/3_4_71_338_101_154_0.99_1.jpg'
-    # new_msk_path = 'composite/test_set/mask_3_4_71_338_101_154_0.99_1.jpg'
-    # annID = '3'
-    # scID = '4'
-    # bbox = '[71, 338, 101, 154]'
-    # scale = 0.0001
-    # label = '1'
-    # catnm = 'dog'
-    # new_img_path = 'composite/test_set/3_4_71_338_101_154_0.1_0.jpg'
-    # new_msk_path = 'composite/test_set/mask_3_4_71_338_101_154_0.1_0.jpg'
     info = [0, int(annID), int(scID),
             bbox, scale, int(label), catnm,
             new_img_path, new_msk_path]
@@ -160,6 +122,7 @@ if __name__ == '__main__':
 
     scale = input()
     category = opt.category
+    print(category)
     # path to transparent foreground
     foreground = f'new_OPA/transparent_mask/{category}/1.png'
     # path to background
@@ -168,10 +131,7 @@ if __name__ == '__main__':
     comp, mask, bbox = compose_images(foreground, background)
     # path to mask for foreground
     foreground_mask = f'new_OPA/transparent_mask/{category}/mask_1.png'
-    # if not os.path.exists(f'new_OPA/foreground/{category}'):
-    #     os.mkdir(f'new_OPA/foreground/{category}')
     category_dir = f'new_OPA/foreground/{category}/'
-    # shutil.copy(background, f'new_OPA/background/{category}/2.jpg')
     shutil.copy(foreground, category_dir+'1.jpg')
     shutil.copy(foreground_mask, category_dir+'mask_1.jpg')
     os.mkdir('new_OPA/composite/')
