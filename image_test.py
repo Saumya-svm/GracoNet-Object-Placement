@@ -174,7 +174,8 @@ if __name__ == '__main__':
     # shutil.copy(background, f'new_OPA/background/{category}/2.jpg')
     shutil.copy(foreground, category_dir+'1.jpg')
     shutil.copy(foreground_mask, category_dir+'mask_1.jpg')
-    os.mkdir('new_OPA/composite/')
+    if not os.path.exists('new_OPA/composite/'):
+        os.mkdir('new_OPA/composite/')
     info = info(comp, mask, bbox, scale)
     eval_loader = get_loader(opt.dst, batch_size=1, num_workers=1, image_size=opt.img_size, shuffle=False, mode_type=opt.eval_type, data_root=opt.data_root, info=info)
     with torch.no_grad():
